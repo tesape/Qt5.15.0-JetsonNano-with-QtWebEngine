@@ -48,6 +48,15 @@ c) change and add (+) lines from line 1426:
 +                             std::unique_ptr<AssemblerBuffer> buffer = {} )
 +    : TurboAssembler(isolate, options, create_code_object, std::move(buffer)){}    
     
+Add line:
+QMAKE_LIBDIR_OPENGL[_ES2]=$$[SYSROOT]/usr/lib/aarch64-linux-gnu/tegra-egl
+and change line:
+EGLSFS_DEVICE_INTEGRATION=eglfs_x11
+in file qt-everywhere-src-5-15-0/qtbase/mkspec/devices/linux-jetson-nano/qmake.conf.
+
+Remove options -skip qtwebengine from configure command line. My command looks like:
+../qt-everywhere-src-5.15.0/configure -opengl es2 -device linux-jetson-nano -device-option CROSS_COMPILE=/opt/qt5jnano/gcc-linaro-5.5.0-2017.10-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu- -sysroot /opt/qt5jnano/sysroot -prefix /usr/local/qt5.15.0 -opensource -confirm-license -skip qtscript -skip wayland -force-debug-info -skip qtdatavis3d -skip location -nomake examples -make libs -pkg-config -no-use-gold-linker -v 
+ 
 Note: Machine's with many cpu cores and small RAM size can often make memory error. After that you can reinvoke compile process again. 
 To prevent this limit number of cores or use computer with large RAM memory size.
 
